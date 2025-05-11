@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import PageLayout from "@/components/layout/PageLayout";
-import { CheckCircle, Award, MessageSquare, ChevronRight, Calendar, Users, BarChart3, Gift } from "lucide-react";
+import { CheckCircle, Award, MessageSquare, ChevronRight, Calendar, Users, BarChart3, Gift, Loader2 } from "lucide-react";
+import { useSystemStatistics } from "@/hooks/useSystemStatistics";
 
 const Index = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { statistics, loading } = useSystemStatistics();
   
   useEffect(() => {
     const checkAuth = () => {
@@ -90,22 +92,42 @@ const Index = () => {
               </p>
             </div>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-center">
               <div className="p-4">
-                <span className="block text-3xl font-bold text-primary mb-1">95%</span>
-                <span className="text-sm text-gray-600">Participación semanal</span>
+                {loading ? (
+                  <div className="flex justify-center items-center h-12">
+                    <Loader2 className="h-6 w-6 animate-spin text-primary" />
+                  </div>
+                ) : (
+                  <span className="block text-3xl font-bold text-primary mb-1">
+                    {statistics.totalUsers || 0}
+                  </span>
+                )}
+                <span className="text-sm text-gray-600">Usuarios registrados</span>
               </div>
               <div className="p-4">
-                <span className="block text-3xl font-bold text-primary mb-1">1,240</span>
-                <span className="text-sm text-gray-600">Reconocimientos enviados</span>
+                {loading ? (
+                  <div className="flex justify-center items-center h-12">
+                    <Loader2 className="h-6 w-6 animate-spin text-primary" />
+                  </div>
+                ) : (
+                  <span className="block text-3xl font-bold text-primary mb-1">
+                    {statistics.totalSurveys || 0}
+                  </span>
+                )}
+                <span className="text-sm text-gray-600">Encuestas completadas</span>
               </div>
               <div className="p-4">
-                <span className="block text-3xl font-bold text-primary mb-1">320</span>
-                <span className="text-sm text-gray-600">Recompensas canjeadas</span>
-              </div>
-              <div className="p-4">
-                <span className="block text-3xl font-bold text-primary mb-1">8.5/10</span>
-                <span className="text-sm text-gray-600">Satisfacción promedio</span>
+                {loading ? (
+                  <div className="flex justify-center items-center h-12">
+                    <Loader2 className="h-6 w-6 animate-spin text-primary" />
+                  </div>
+                ) : (
+                  <span className="block text-3xl font-bold text-primary mb-1">
+                    {statistics.totalFeedback || 0}
+                  </span>
+                )}
+                <span className="text-sm text-gray-600">Feedback recibido</span>
               </div>
             </div>
           </div>
@@ -222,22 +244,42 @@ const Index = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-center">
           <div className="p-4">
-            <span className="block text-3xl font-bold text-primary mb-1">95%</span>
-            <span className="text-sm text-gray-600">Participación semanal</span>
+            {loading ? (
+              <div className="flex justify-center items-center h-12">
+                <Loader2 className="h-6 w-6 animate-spin text-primary" />
+              </div>
+            ) : (
+              <span className="block text-3xl font-bold text-primary mb-1">
+                {statistics.totalUsers || 0}
+              </span>
+            )}
+            <span className="text-sm text-gray-600">Usuarios registrados</span>
           </div>
           <div className="p-4">
-            <span className="block text-3xl font-bold text-primary mb-1">1,240</span>
-            <span className="text-sm text-gray-600">Reconocimientos enviados</span>
+            {loading ? (
+              <div className="flex justify-center items-center h-12">
+                <Loader2 className="h-6 w-6 animate-spin text-primary" />
+              </div>
+            ) : (
+              <span className="block text-3xl font-bold text-primary mb-1">
+                {statistics.totalSurveys || 0}
+              </span>
+            )}
+            <span className="text-sm text-gray-600">Encuestas completadas</span>
           </div>
           <div className="p-4">
-            <span className="block text-3xl font-bold text-primary mb-1">320</span>
-            <span className="text-sm text-gray-600">Recompensas canjeadas</span>
-          </div>
-          <div className="p-4">
-            <span className="block text-3xl font-bold text-primary mb-1">8.5/10</span>
-            <span className="text-sm text-gray-600">Satisfacción promedio</span>
+            {loading ? (
+              <div className="flex justify-center items-center h-12">
+                <Loader2 className="h-6 w-6 animate-spin text-primary" />
+              </div>
+            ) : (
+              <span className="block text-3xl font-bold text-primary mb-1">
+                {statistics.totalFeedback || 0}
+              </span>
+            )}
+            <span className="text-sm text-gray-600">Feedback recibido</span>
           </div>
         </div>
       </div>
